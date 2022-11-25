@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: OtusTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 130.384 s <<< FAILURE! - in OtusTest
+test2  Time elapsed: 28.314 s  <<< ERROR!
+org.openqa.selenium.NoSuchElementException: 
+no such element: Unable to locate element: {"method":"css selector","selector":"div.lessons>.js-stats:nth-child(5)"}
+  (Session info: chrome=107.0.5304.121)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'ayatbs-MacBook-Air.local', ip: 'fe80:0:0:0:103d:126:823a:e2ec%en0', os.name: 'Mac OS X', os.arch: 'aarch64', os.version: '11.7', java.version: '19'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 107.0.5304.121, chrome: {chromedriverVersion: 107.0.5304.62 (1eec40d3a576..., userDataDir: /var/folders/ly/js37y5r524j...}, goog:chromeOptions: {debuggerAddress: localhost:58572}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: MAC, platformName: MAC, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: ec270f526b973c56d9fb5f24523ae966
+*** Element info: {Using=css selector, value=div.lessons>.js-stats:nth-child(5)}
+	at OtusTest.test2(OtusTest.java:46)
+
+test3  Time elapsed: 27.375 s  <<< ERROR!
+org.openqa.selenium.ElementClickInterceptedException: 
+element click intercepted: Element <div class="dod_new-events__list js-dod_new_events">...</div> is not clickable at point (600, 542). Other element would receive the click: <a class="cookies__link" href="/legal/cookie/" target="_blank">...</a>
+  (Session info: chrome=107.0.5304.121)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'ayatbs-MacBook-Air.local', ip: 'fe80:0:0:0:103d:126:823a:e2ec%en0', os.name: 'Mac OS X', os.arch: 'aarch64', os.version: '11.7', java.version: '19'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 107.0.5304.121, chrome: {chromedriverVersion: 107.0.5304.62 (1eec40d3a576..., userDataDir: /var/folders/ly/js37y5r524j...}, goog:chromeOptions: {debuggerAddress: localhost:58742}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: MAC, platformName: MAC, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 39f8b563c4e7447b60d516bca1e3a825
+	at OtusTest.test3(OtusTest.java:66)
+
