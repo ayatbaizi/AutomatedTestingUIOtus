@@ -1,6 +1,7 @@
-import Utils.BaseTest;
 import data.CoursesData;
 import data.MainMenuData;
+import pageObject.*;
+import utils.BaseTest;
 import org.junit.jupiter.api.*;
 
 
@@ -9,15 +10,25 @@ public class OtusTest extends BaseTest {
 
    @Test
    public void test() {
+
       //Проверка количества курсов в разделе тестирование:
       //1 Пользователь переходит в разделе тестирование
-      //2 На странице отображаются карточки курсов. Количество карточек равно 14
+      //2 На странице отображаются карточки курсов. Количество отображаемых карточек
 
+      new MainPage(driver)
+              .clickButtonLogin();
 
-      mainPage.clickMainMenuCourses(MainMenuData.Cources.Cources);
-      mainPage.clickCoursesByName(CoursesData.TESTING);
+      new LoginPage(driver)
+              .waitVisibleInputBox()
+              .authorizationUser()
+              .waitModalWindowInvisible();
 
-      testingPage.cardsCounter();
+      new MainPage(driver)
+              .clickMainMenuCourses(MainMenuData.COURCES)
+              .clickCoursesByName(CoursesData.TESTING);
+
+      new TestingPage(driver)
+              .cardsCounter();
    }
 
    @Test
@@ -31,29 +42,40 @@ public class OtusTest extends BaseTest {
       //    Длительность обучения
       //    Формат // Минимально достаточное - проверить одну карточку.
 
-      testingPage.clickOnCard5();
-      testCardPage.getTitleCard5();
-      testCardPage.getDescriptionCard5();
-      testCardPage.getDurationCard5();
-      testCardPage.getFormatCard5();
+      new MainPage(driver)
+              .clickButtonLogin();
+
+      new LoginPage(driver)
+              .waitVisibleInputBox()
+              .authorizationUser()
+              .waitModalWindowInvisible();
+
+      new TestingPage(driver)
+              .open("/categories/testing/");
+      new TestingPage(driver)
+              .clickOnCard5();
+      new TestCardPage(driver)
+              .getTitleCard5()
+              .getDescriptionCard5()
+              .getDurationCard5()
+              .getFormatCard5();
    }
-
-
    @Test
    public void test3() {
-
 
       //Валидация дат предстоящих мероприятий:
       //    1 Пользователь переходит в раздел События -> Календарь мероприятий
       //    2 На странице отображаются карточки предстоящих мероприятий.
       //    3 Даты проведения мероприятий больше или равны текущей дате
 
-      mainPage.clickOnEventsButton();
-      mainPage.clickOnCalendarButton();
+      new MainPage(driver)
+              .clickOnEventsButton()
+              .clickOnCalendarButton();
 
-      calendarEventsPage.clickOnCalendarEventsElement();
-      calendarEventsPage.getSumEventsElemets();
-      calendarEventsPage.getEventDays();
+      new CalendarEventsPage(driver)
+              //.clickOnCalendarEventsElement()
+              .getSumEventsElemets()
+              .getEventDays();
    }
 
    @Test
@@ -63,13 +85,13 @@ public class OtusTest extends BaseTest {
       //    2 Пользователь сортирует мероприятия по типу Открытые вебинары
       //    3 На странице отображаются карточки предстоящих мероприятий. На каждой карточке в типе указанно "Открытый вебинар"
 
-      mainPage.clickOnEventsButton();
-      mainPage.clickOnCalendarButton();
-      //calendarEventsPage.moveToEventsTypeSelector();
-      calendarEventsPage.openEventsTypeSelector();
-      calendarEventsPage.selectEventType();
+      new MainPage(driver)
+              .clickOnEventsButton()
+              .clickOnCalendarButton();
 
-
+      new CalendarEventsPage(driver)
+              .openEventsTypeSelector()
+              .selectEventType();
    }
 }
 

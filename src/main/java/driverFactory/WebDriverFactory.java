@@ -21,6 +21,7 @@ public class WebDriverFactory {
       DriverData driverName = DriverData.valueOf(browserType);
       return driverName;
    }
+
    public WebDriver create(DriverData driverName, List<String> options) throws BrowserNotSupportedExeception {
       switch (driverName) {
          case CHROME:

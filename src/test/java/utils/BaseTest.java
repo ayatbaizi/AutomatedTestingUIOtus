@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import driverFactory.WebDriverFactory;
 import exceptions.BrowserNotSupportedExeception;
@@ -11,17 +11,11 @@ import pageObject.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
-public class BaseTest {
-   public LoginPage loginPage;
-   public MainPage mainPage;
-   public TestingPage testingPage;
-   public TestCardPage testCardPage;
-   public CalendarEventsPage calendarEventsPage;
-   public WebDriver driver;
 
+public abstract class BaseTest {
+   protected WebDriver driver;
 
 
    @BeforeAll
@@ -33,16 +27,8 @@ public class BaseTest {
    @BeforeEach
    public void initDriverOptions() throws BrowserNotSupportedExeception {
       List<String> options = new ArrayList<>();
-      options.add("--start-maximized");
       driver = new WebDriverFactory().create(WebDriverFactory.setDriverType(), options);
-      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
       new MainPage(driver).open("/");
-      //logger.info("Logs on");
-      loginPage = new LoginPage(driver);
-      mainPage = new MainPage(driver);
-      testingPage = new TestingPage(driver);
-      testCardPage = new TestCardPage(driver);
-      calendarEventsPage = new CalendarEventsPage(driver);
 
 
    }

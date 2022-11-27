@@ -5,10 +5,7 @@ import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -26,72 +23,61 @@ public class CalendarEventsPage extends BasePage {
    @FindBy(xpath = "//*[contains(@class,'dod_new-events__list')]//a")
    private List<WebElement> countCalendarEvents;
 
-
-   @FindBys(@FindBy(xpath = "//span[contains(@class,'dod_new-event__calendar-icon')]/following-sibling::span"))
-   private List<WebElement> dates;
-   @FindBy(css = "span.dod_new-events-dropdown__input-selected")
-   private WebElement openDayDropDownMenuButton;
-   @FindBy(css = ".dod_new-events-dropdown__list-item[title='ДОД']")
-   private WebElement openDayEventTitle;
-   @FindBy(css = "div.dod_new-type__text")
-   private WebElement openDayEventResult;
-   @FindBys(@FindBy(css = "div.dod_new-type__text"))
-   private List<WebElement> openDayEventResults;
-
-   @FindBy(css = "div.footer2__links.footer2__links_center")
-   private WebElement footer;
-   @FindBy(xpath = "//*[contains(@class,'dod_new-events__list')]//a[contains(@href,'https://otus.ru/lessons/android-professional/#event-2093')]")
-   private WebElement lastEventHref;
-
    @FindBy(xpath = "(//div[contains(@class, 'dod_new-events-dropdown__input')])[1]")
    private WebElement eventsTypeSelector;
 
    @FindBy(xpath = "(//a[contains(@title, 'Открытый вебинар')])[1]")
    private WebElement eventType;
 
-   public void clickOnCalendarEventsElement() {
+   private List<WebElement> titleEventsElement = driver.findElements(By.xpath("//*[contains(@class, 'js-dod-new-event-title')]"));
+
+   public CalendarEventsPage clickOnCalendarEventsElement() {
       calendarEventsElement.click();
+
+      return this;
    }
 
-   public void getSumEventsElemets() {
-      logger.info("Количество отображаемых карточек на вебстранице равно: " + countCalendarEvents.size());
+   public CalendarEventsPage getSumEventsElemets() {
+      logger.info("Количество отображаемых карточек событий на вебстранице равно: " + countCalendarEvents.size());
+
+      return this;
    }
 
-   public void openEventsTypeSelector() {
+   public CalendarEventsPage openEventsTypeSelector() {
       actions.moveToElement(eventsTypeSelector).build().perform();
       eventsTypeSelector.click();
+
+      return this;
    }
 
-   public void selectEventType() {
-      //String element = ("(//a[contains(@title, 'Открытый вебинар')])[1]");
+   public CalendarEventsPage selectEventType() {
       actions.moveToElement(eventType).click().build().perform();
-      //eventType.click();
+
+      return this;
    }
 
 
    private String getCurrentData() {
       Calendar cal = Calendar.getInstance();
       String currentData = new SimpleDateFormat("dd MMMM", new Locale("ru")).format(cal.getTime());
-      //System.out.println(month);
-      logger.info("Текущая дата: " + currentData);
+
+      //logger.info("Текущая дата: " + currentData);
       return currentData;
    }
+
 
    public String getEventDays() {
       List<WebElement> elements = driver.findElements(By.xpath(" //span[contains(@class,'dod_new-event__calendar-icon')]/following-sibling::span"));
       String cardDate = null;
-      for (WebElement element : elements) {
+
+      for (WebElement element : elements ) {
          cardDate = element.getText();
-         String today = getCurrentData();
-         //String after = DateofEvent.JUNE7.getDateOfEvent();
-
-         if (today.equals(cardDate)) {
-            logger.info("Данное мероприятие равно текущей дате " + today);
-         } else {
-            logger.info("Данное мероприятие больше текущей даты " + today);
-         }
+            if (getCurrentData().equals(cardDate)) {
+               logger.info("Данное мероприятие равно текущей дате " + getCurrentData());
+            } else {
+               logger.info("Данное мероприятие больше текущей даты " + getCurrentData());
+            }
       }
-
       return cardDate;
    }
 

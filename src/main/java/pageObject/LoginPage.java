@@ -1,8 +1,10 @@
 package pageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
    public LoginPage(WebDriver driver) {
@@ -12,33 +14,42 @@ public class LoginPage extends BasePage {
    private final static String LOGIN = System.getProperty("login");
    private final static String PASSWORD = System.getProperty("password");
 
-   @FindBy(xpath ="//button[contains(@data-modal-id, 'new-log-reg')]" )
-   private WebElement newLoginButton;
 
-   @FindBy(xpath = "//input[@type='text'][contains(@class,'email')]")
-   private WebElement loginField;
 
-   @FindBy(xpath = "//input[@type='password'][contains(@class,'new-input')]")
-   private WebElement passwordField;
+   @FindBy(css = "div.new-input-line_slim:nth-child(3) > input:nth-child(1)")
+   private WebElement loginTextBox;
 
-   @FindBy(xpath = "//button[contains(text(),'Войти')]")
-   private WebElement enterButton;
+   @FindBy(css = ".js-psw-input")
+   private WebElement passwordTextBox;
 
-   public void clickNewLoginButton() {
-      newLoginButton.click();
+   @FindBy(css = "div.new-input-line_last:nth-child(5) > button:nth-child(1)")
+   private WebElement loginButton;
+
+   private String inputTextBox = "div.new-input-line_slim:nth-child(3) > input:nth-child(1)";
+
+   private String loginModalWindow = "//div[contains(@class, 'modal-container')][1]";
+
+
+   public LoginPage waitVisibleInputBox() {
+      wait.until(ExpectedConditions
+              .visibilityOfElementLocated(By.cssSelector(inputTextBox)))
+              .isDisplayed();
+
+      return this;
    }
 
-   public void inputLogin() {
-      loginField.sendKeys(LOGIN);
+   public LoginPage waitModalWindowInvisible() {
+      wait.until(ExpectedConditions
+              .invisibilityOfElementLocated(By.xpath(loginModalWindow)));
+
+      return this;
    }
 
-   public void inputPassword() {
-      passwordField.sendKeys(PASSWORD);
-   }
+   public LoginPage authorizationUser() {
+      loginTextBox.sendKeys(LOGIN);
+      passwordTextBox.sendKeys(PASSWORD);
+      loginButton.submit();
 
-
-   public MainPage clickEnterButton(){
-      enterButton.click();
-      return new MainPage(driver);
+      return this;
    }
 }

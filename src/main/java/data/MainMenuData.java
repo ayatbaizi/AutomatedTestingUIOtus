@@ -1,7 +1,7 @@
 package data;
 
 public enum MainMenuData {
-   Cources("Курсы");
+   COURCES("Курсы");
 
    private String name;
 

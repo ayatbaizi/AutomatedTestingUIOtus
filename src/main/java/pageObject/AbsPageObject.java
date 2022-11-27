@@ -5,7 +5,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AbsPageObject {
+public abstract class AbsPageObject {
    protected WebDriver driver;
    protected Actions actions;
    protected WebDriverWait wait;
@@ -14,6 +14,7 @@ public class AbsPageObject {
 
       this.driver = driver;
       this.actions = new Actions(driver);
+      this.wait = new WebDriverWait(driver, 15);
       PageFactory.initElements(driver, this);
    }
 }
