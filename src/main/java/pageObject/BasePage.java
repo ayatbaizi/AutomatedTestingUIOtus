@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 
 
-
 public abstract class BasePage extends AbsPageObject{
 
    private final static String BASE_URL = System.getProperty("base.url");
