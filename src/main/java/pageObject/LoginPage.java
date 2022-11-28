@@ -15,7 +15,6 @@ public class LoginPage extends BasePage {
    private final static String PASSWORD = System.getProperty("password");
 
 
-
    @FindBy(css = "div.new-input-line_slim:nth-child(3) > input:nth-child(1)")
    private WebElement loginTextBox;
 

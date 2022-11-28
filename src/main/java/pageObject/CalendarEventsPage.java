@@ -2,7 +2,6 @@ package pageObject;
 
 
 import org.openqa.selenium.By;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,7 +60,6 @@ public class CalendarEventsPage extends BasePage {
       Calendar cal = Calendar.getInstance();
       String currentData = new SimpleDateFormat("dd MMMM", new Locale("ru")).format(cal.getTime());
 
-      //logger.info("Текущая дата: " + currentData);
       return currentData;
    }
 
